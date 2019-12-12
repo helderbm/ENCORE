@@ -2,12 +2,42 @@
   "openapi": "3.0.0",
   "info": {
     "title": "BROKER",
-    "version": "1.0"
+    "version": "1.0",
+    "description": "Interaction between the Cloud Broker platform (responsible for managing sensors data) and third-party software applications",
+    "contact": {
+      "name": "Helder Moreira",
+      "email": "helder@spa.pt"
+    }
   },
   "servers": [
     {
       "url": "http://localhost:3000"
     }
   ],
-  "paths": {}
+  "paths": {
+    "/server": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-server"
+      }
+    },
+    "/sgws": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-sgws"
+      }
+    },
+    "/db": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-db"
+      }
+    }
+  }
 }
