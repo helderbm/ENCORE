@@ -23,8 +23,7 @@
       "get": {
         "summary": "SERVER endpoint",
         "tags": [
-          "server",
-          "GET"
+          "server"
         ],
         "responses": {
           "200": {
@@ -133,8 +132,7 @@
       "get": {
         "summary": "SGWS.ID endpoint",
         "tags": [
-          "sgws",
-          "GET"
+          "sgws"
         ],
         "responses": {
           "200": {
@@ -439,7 +437,6 @@
           }
         },
         "tags": [
-          "post",
           "sgws"
         ]
       }
@@ -449,8 +446,7 @@
         "summary": "SGWS.ID.DG endoint",
         "tags": [
           "sgws",
-          "database",
-          "GET"
+          "database"
         ],
         "responses": {
           "200": {
@@ -718,8 +714,7 @@
       "get": {
         "summary": "SGWS endpoint",
         "tags": [
-          "sgws",
-          "GET"
+          "sgws"
         ],
         "responses": {
           "200": {
@@ -894,8 +889,7 @@
         "summary": "SGWS.ID.ALERTS endpoint",
         "tags": [
           "sgws",
-          "database",
-          "GET"
+          "database"
         ],
         "responses": {
           "200": {
@@ -1208,7 +1202,6 @@
           "description": ""
         },
         "tags": [
-          "post",
           "sgws"
         ]
       }
