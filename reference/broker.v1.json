@@ -97,14 +97,32 @@
           "mac": {
             "type": "string"
           },
+          "name": {
+            "type": "string"
+          },
           "last-comm": {
+            "type": [
+              "string",
+              "integer"
+            ]
+          },
+          "manufactor": {
             "type": "string"
           },
-          "online": {
+          "model": {
             "type": "string"
           },
-          "": {
-            "type": "string"
+          "LQI": {
+            "type": "number"
+          },
+          "RSSI": {
+            "type": "number"
+          },
+          "battery-level": {
+            "type": "integer"
+          },
+          "tecnology": {
+            "type": "boolean"
           }
         }
       },
@@ -258,6 +276,30 @@
             "type": "boolean"
           },
           "type2": {
+            "type": "boolean"
+          }
+        }
+      },
+      "sensor-type": {
+        "title": "sensor-type",
+        "type": "object",
+        "properties": {
+          "ligth": {
+            "type": "boolean"
+          },
+          "temp": {
+            "type": "boolean"
+          },
+          "mov": {
+            "type": "boolean"
+          },
+          "hum": {
+            "type": "boolean"
+          },
+          "alarm": {
+            "type": "boolean"
+          },
+          "co2": {
             "type": "boolean"
           }
         }
