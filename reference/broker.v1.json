@@ -63,12 +63,6 @@
           "": {
             "description": "Response with server info",
             "headers": {
-              "token": {
-                "schema": {
-                  "type": "string"
-                },
-                "description": "Token return by server after authentication process"
-              },
               "request-id": {
                 "schema": {
                   "type": "string"
@@ -87,7 +81,8 @@
               "schema": {
                 "type": "object",
                 "properties": {}
-              }
+              },
+              "examples": {}
             },
             "application/xml": {
               "schema": {
@@ -128,7 +123,7 @@
       },
       "parameters": []
     },
-    "/sgws/{id}": {
+    "/sgw/{id}": {
       "get": {
         "summary": "details",
         "tags": [
@@ -441,7 +436,7 @@
         ]
       }
     },
-    "/sgws/{id}/dg": {
+    "/sgw/{id}/dg": {
       "get": {
         "summary": "sensors data",
         "tags": [
@@ -932,7 +927,7 @@
         ]
       }
     },
-    "/sgws/{id}/alerts": {
+    "/sgw/{id}/alerts": {
       "parameters": [
         {
           "type": "string",
