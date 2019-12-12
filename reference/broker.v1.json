@@ -390,7 +390,7 @@
                         "type": "integer",
                         "description": "Timestamp of last record"
                       },
-                      "max-records": {
+                      "max-rows": {
                         "type": "integer",
                         "description": "number of max records return"
                       },
@@ -704,7 +704,11 @@
           "type": "string",
           "name": "id",
           "in": "path",
-          "required": true
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "uuid of SGW"
         }
       ],
       "get": {
@@ -817,7 +821,7 @@
               "type": "string"
             },
             "in": "header",
-            "name": "response-api",
+            "name": "response-id",
             "description": "unique id to be used in the response HEADER"
           },
           {
@@ -834,13 +838,155 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "filter": {
+                    "type": "object",
+                    "properties": {
+                      "processed": {
+                        "type": "boolean"
+                      },
+                      "time-start": {
+                        "type": "integer"
+                      },
+                      "time-end": {
+                        "type": "integer"
+                      },
+                      "max-rows": {
+                        "type": "integer",
+                        "default": 100,
+                        "description": "Max return records"
+                      }
+                    }
+                  }
+                }
               }
             },
             "application/xml": {
               "schema": {
                 "type": "object",
                 "properties": {}
+              }
+            }
+          },
+          "description": "A filter can be apply to the results return"
+        },
+        "description": "Return alerts store in the Database concerning a specific SGW, if no BODY is send the last 100 rows will be return"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-sgws-{id}-alerts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process",
+                "required": true
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the POST HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id to be used in the response HEADER"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the POST HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id to be used in the response HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Change alert \"processed\" field",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "alert-id": {
+                    "type": "string"
+                  },
+                  "processed": {
+                    "type": "boolean"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "alert-id",
+                  "processed"
+                ]
               }
             }
           }
@@ -973,6 +1119,9 @@
           },
           "raw": {
             "type": "object"
+          },
+          "notes": {
+            "type": "string"
           }
         },
         "required": [
@@ -1080,7 +1229,8 @@
         "description": "Simple Model representation of the remote SGW object",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
