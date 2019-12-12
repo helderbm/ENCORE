@@ -19,9 +19,50 @@
       "get": {
         "summary": "SERVER endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
         "operationId": "get-server",
-        "description": "Information regarding Cloud Server"
+        "description": "Information regarding Cloud Server",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "request-id": {
+                    "type": "string"
+                  },
+                  "api-ver": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "request-id": {
+                    "type": "string"
+                  },
+                  "api-ver": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
       }
     },
     "/sgws": {
@@ -88,12 +129,39 @@
       "sgw-dg-alerts": {
         "title": "sgw-dg-alerts",
         "type": "object",
+        "description": "Database entry for SGW and relative sensors alerts",
         "properties": {
           "id": {
             "type": "string"
+          },
+          "sensor-id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "level": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "processed": {
+            "type": "boolean"
           }
         },
-        "description": "Database entry for SGW and relative sensors alerts"
+        "required": [
+          "id",
+          "sensor-id",
+          "timestamp",
+          "type",
+          "level",
+          "description",
+          "processed"
+        ]
       },
       "sgw": {
         "title": "sgw",
@@ -114,6 +182,21 @@
           },
           "long": {
             "$ref": "#/components/schemas/gps"
+          },
+          "encryption": {
+            "$ref": "#/components/schemas/encryption-supported"
+          },
+          "recent-alerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sgw-dg-alerts"
+            }
+          },
+          "sensors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sensor"
+            }
           }
         }
       },
@@ -139,6 +222,33 @@
           }
         },
         "description": "Database entry for movement sensors"
+      },
+      "server": {
+        "title": "server",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer"
+          },
+          "encryption": {
+            "$ref": "#/components/schemas/encryption-supported"
+          }
+        }
+      },
+      "encryption-supported": {
+        "title": "encryption-types",
+        "type": "object",
+        "properties": {
+          "typ1": {
+            "type": "boolean"
+          },
+          "type2": {
+            "type": "boolean"
+          }
+        }
       }
     }
   }
