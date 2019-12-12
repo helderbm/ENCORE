@@ -20,7 +20,8 @@
         "summary": "SERVER endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-server"
+        "operationId": "get-server",
+        "description": "Information regarding Cloud Server"
       }
     },
     "/sgws": {
@@ -28,7 +29,8 @@
         "summary": "SGWS endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-sgws"
+        "operationId": "get-sgws",
+        "description": "Endpoint representing the smart gateways on the field"
       }
     },
     "/db": {
@@ -36,7 +38,25 @@
         "summary": "DB endpoint",
         "tags": [],
         "responses": {},
-        "operationId": "get-db"
+        "operationId": "get-db",
+        "description": "Cloud database for sensors and data"
+      }
+    },
+    "/sgws/sensors": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-sgws-sensors",
+        "description": "Endpoint representing the sensors instaled on smart gateways on the field"
+      }
+    },
+    "/db/sensors": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-db-sensors"
       }
     }
   }
