@@ -261,7 +261,7 @@
         }
       ]
     },
-    "/sgws/{id}/db": {
+    "/sgws/{id}/dg": {
       "get": {
         "summary": "SENSORS endoint",
         "tags": [],
