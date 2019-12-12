@@ -1401,7 +1401,10 @@
           "blockchain": {
             "type": "boolean"
           }
-        }
+        },
+        "x-tags": [
+          "models"
+        ]
       },
       "sensor-type": {
         "title": "sensor-type",
@@ -1509,6 +1512,9 @@
           "id",
           "msg",
           "note"
+        ],
+        "x-tags": [
+          "models"
         ]
       }
     },
