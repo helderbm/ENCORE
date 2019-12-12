@@ -637,12 +637,23 @@
                 "properties": {
                   "filter": {
                     "type": "object",
+                    "description": "filter selection",
                     "properties": {
                       "online": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "select SGWs that are online/offline"
                       },
                       "processed-alerts": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "description": "filter SGWs with alerts (not)processed"
+                      },
+                      "cluster": {
+                        "type": "string",
+                        "description": "select SGWs belonging to a cluster"
+                      },
+                      "group": {
+                        "type": "string",
+                        "description": "select SGWs belonging to a group"
                       }
                     }
                   }
