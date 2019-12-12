@@ -205,8 +205,23 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
-        "responses": {},
-        "operationId": "get-sgws-{list}"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-sgws-{list}",
+        "description": "List of SGWS accessible depending on login permissions"
       }
     }
   },
@@ -215,7 +230,7 @@
       "sensor": {
         "title": "sensor",
         "type": "object",
-        "description": "Sensor model description",
+        "description": "Model for Sensor description",
         "properties": {
           "id": {
             "type": "string"
@@ -264,7 +279,7 @@
       "sensor-dg": {
         "title": "sensor-dg-hum",
         "type": "object",
-        "description": "Database entry for sensors readings",
+        "description": "Model for Database entries of sensors readings",
         "properties": {
           "id": {
             "type": "number"
@@ -286,10 +301,10 @@
           }
         }
       },
-      "sgw-dg-alerts": {
+      "sgw-alerts": {
         "title": "sgw-dg-alerts",
         "type": "object",
-        "description": "Database entry for SGW and relative sensors alerts",
+        "description": "Alert entries from SGW and respective sensors",
         "properties": {
           "id": {
             "type": "string"
@@ -326,61 +341,19 @@
           "processed"
         ]
       },
-      "sgw": {
+      "sgw-sensors": {
         "title": "sgw",
         "type": "object",
-        "description": "Representation of the remote SGW object",
+        "description": "Detail Model representation of the remote SGW object with sensors",
         "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "adress": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "gps": {
-            "$ref": "#/components/schemas/gps"
-          },
-          "encryption": {
-            "$ref": "#/components/schemas/encryption-supported"
-          },
-          "recent-alerts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/sgw-dg-alerts"
-            }
+          "sgw": {
+            "$ref": "#/components/schemas/sgw-info"
           },
           "sensors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/sensor"
             }
-          },
-          "local-ip": {
-            "type": "string"
-          },
-          "public-ip": {
-            "type": "string"
-          },
-          "sofware-ver": {
-            "type": "string"
-          },
-          "last-comm": {
-            "type": "string"
-          },
-          "group": {
-            "type": "string"
-          },
-          "cluster": {
-            "type": "string"
-          },
-          "hw-ver": {
-            "type": "string"
           }
         }
       },
@@ -411,7 +384,7 @@
             "$ref": "#/components/schemas/encryption-supported"
           }
         },
-        "description": "Server capabilities and status"
+        "description": "List of Cloud Broker Server capabilities and status"
       },
       "encryption-supported": {
         "title": "encryption-types",
@@ -449,7 +422,50 @@
             "type": "boolean"
           }
         },
-        "description": "Sensors capabilities"
+        "description": "Model of sensor capabilities"
+      },
+      "sgw-info": {
+        "title": "sgw-info",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "hw-ver": {
+            "type": "string"
+          },
+          "cluster": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "last-comm": {
+            "type": "string"
+          },
+          "sofware-ver": {
+            "type": "string"
+          },
+          "public-ip": {
+            "type": "string"
+          },
+          "local-ip": {
+            "type": "string"
+          },
+          "gps": {
+            "$ref": "#/components/schemas/gps"
+          },
+          "adress": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Simple Model representation of the remote SGW object"
       }
     }
   }
