@@ -21,7 +21,7 @@
   "paths": {
     "/server": {
       "get": {
-        "summary": "SERVER endpoint",
+        "summary": "Server details",
         "tags": [
           "server"
         ],
@@ -130,7 +130,7 @@
     },
     "/sgws/{id}": {
       "get": {
-        "summary": "Get SGW details",
+        "summary": "SGW details",
         "tags": [
           "sgws"
         ],
@@ -292,7 +292,7 @@
         }
       ],
       "post": {
-        "summary": "Send command to remote SGW",
+        "summary": "SGW send command",
         "operationId": "post-sgws-{id}",
         "responses": {
           "200": {
@@ -443,7 +443,7 @@
     },
     "/sgws/{id}/dg": {
       "get": {
-        "summary": "SGWS.ID.DG endoint",
+        "summary": "SGW sensors data",
         "tags": [
           "sgws",
           "database"
@@ -660,7 +660,7 @@
     },
     "/login": {
       "post": {
-        "summary": "Login",
+        "summary": "Login to server",
         "operationId": "post-login",
         "responses": {
           "200": {
@@ -712,7 +712,7 @@
     "/sgws": {
       "parameters": [],
       "get": {
-        "summary": "SGWS endpoint",
+        "summary": "List SGWS",
         "tags": [
           "sgws"
         ],
@@ -886,7 +886,7 @@
         }
       ],
       "get": {
-        "summary": "SGWS.ID.ALERTS endpoint",
+        "summary": "SGW alerts history",
         "tags": [
           "sgws",
           "database"
@@ -1050,7 +1050,7 @@
         "description": "Return alerts store in the Database concerning a specific SGW, if no BODY is send the last 100 rows will be return"
       },
       "post": {
-        "summary": "",
+        "summary": "Modify SGW alert entry",
         "operationId": "post-sgws-{id}-alerts",
         "responses": {
           "200": {
