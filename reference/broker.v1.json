@@ -130,7 +130,7 @@
     },
     "/sgws/{id}": {
       "get": {
-        "summary": "SGWS.ID endpoint",
+        "summary": "Get SGW details",
         "tags": [
           "sgws"
         ],
@@ -292,7 +292,7 @@
         }
       ],
       "post": {
-        "summary": "",
+        "summary": "Send command to remote SGW",
         "operationId": "post-sgws-{id}",
         "responses": {
           "200": {
