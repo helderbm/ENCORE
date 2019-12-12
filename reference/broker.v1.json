@@ -33,30 +33,13 @@
         "description": "Endpoint representing the smart gateways on the field"
       }
     },
-    "/db": {
-      "get": {
-        "summary": "DB endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-db",
-        "description": "Cloud database for sensors and data"
-      }
-    },
     "/sgws/sensors": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "SENSORS endoint",
         "tags": [],
         "responses": {},
         "operationId": "get-sgws-sensors",
         "description": "Endpoint representing the sensors instaled on smart gateways on the field"
-      }
-    },
-    "/db/sensors": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
-        "responses": {},
-        "operationId": "get-db-sensors"
       }
     }
   }
