@@ -51,8 +51,8 @@
               }
             }
           },
-          "201": {
-            "description": "Created"
+          "403": {
+            "description": "Forbidden"
           },
           "": {
             "description": "Response with server info",
@@ -204,7 +204,7 @@
           }
         },
         "operationId": "get-sgws",
-        "description": "Endpoint representing the smart gateways on the field",
+        "description": "Endpoint representing the remote smart gateways",
         "parameters": [
           {
             "schema": {
@@ -244,7 +244,7 @@
         }
       ]
     },
-    "/sgws/{id}/sensors/{sensorId}": {
+    "/sgws/{id}/db": {
       "get": {
         "summary": "SENSORS endoint",
         "tags": [],
@@ -271,21 +271,30 @@
                 },
                 "description": "API-VER, default is latest stable"
               }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sensor"
+                }
+              }
             }
           },
-          "401": {
-            "description": "Unauthorized",
+          "400": {
+            "description": "Bad Request",
             "headers": {
               "token": {
                 "schema": {
                   "type": "string"
                 },
+                "description": "Token return by server after authentication process",
                 "required": true
               },
               "response-id": {
                 "schema": {
                   "type": "string"
-                }
+                },
+                "description": "unique id used in the request HEADER"
               },
               "api-ver": {
                 "schema": {
@@ -293,7 +302,23 @@
                 },
                 "description": "API-VER, default is latest stable"
               }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {}
           }
         },
         "operationId": "get-sgws-sensors",
@@ -305,7 +330,8 @@
             },
             "in": "header",
             "name": "token",
-            "required": true
+            "required": true,
+            "description": "Token return by server after authentication process"
           },
           {
             "schema": {
@@ -331,14 +357,6 @@
             "type": "string"
           },
           "name": "id",
-          "in": "path",
-          "required": true
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "sensorId",
           "in": "path",
           "required": true
         }
@@ -380,8 +398,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "403": {
+            "description": "Forbidden"
           }
         },
         "operationId": "get-login",
@@ -456,8 +474,44 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token return by server after authentication process"
+              },
+              "response-api": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "operationId": "get-sgws-{list}",
@@ -474,7 +528,7 @@
                       "online": {
                         "type": "boolean"
                       },
-                      "alerts": {
+                      "processed-alerts": {
                         "type": "boolean"
                       }
                     }
@@ -555,10 +609,72 @@
                 },
                 "description": "API-VER, default is latest stable"
               }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sgw-alerts"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sgw-alerts"
+                  }
+                }
+              }
             }
           },
-          "401": {
-            "description": "Unauthorized"
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process",
+                "required": true
+              },
+              "response-api": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "headers": {}
           }
         },
         "operationId": "get-sgws-{id}-alerts",
@@ -569,7 +685,8 @@
             },
             "in": "header",
             "name": "token",
-            "required": true
+            "required": true,
+            "description": "Token return by server after authentication process"
           },
           {
             "schema": {
@@ -879,6 +996,26 @@
           "sofware-ver",
           "public-ip",
           "local-ip"
+        ]
+      },
+      "err-codes": {
+        "title": "err-codes",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "msg",
+          "note"
         ]
       }
     }
