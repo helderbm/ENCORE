@@ -52,43 +52,48 @@
           "id": {
             "type": "string"
           }
-        }
+        },
+        "description": "Sensor description"
       },
       "sensor-dg-temp": {
-        "title": "dg-temp",
+        "title": "sensor-dg-temp",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
           }
-        }
+        },
+        "description": "Database entry for temperature sensors"
       },
       "sensor-dg-hum": {
-        "title": "dg-hum",
+        "title": "sensor-dg-hum",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
           }
-        }
+        },
+        "description": "Database entry for humidity sensors"
       },
       "sensor-dg-ligth": {
-        "title": "dg-ligth",
+        "title": "sensor-dg-ligth",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
           }
-        }
+        },
+        "description": "Database entry for ligth sensors"
       },
-      "sgw-alerts": {
-        "title": "dg-alerts",
+      "sgw-dg-alerts": {
+        "title": "sgw-dg-alerts",
         "type": "object",
         "properties": {
           "id": {
             "type": "string"
           }
-        }
+        },
+        "description": "Database entry for SGW and relative sensors alerts"
       },
       "sgw": {
         "title": "sgw",
@@ -109,7 +114,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "description": "representation of the remote SGW object"
       },
       "gps": {
         "title": "gps",
@@ -121,7 +127,18 @@
           "long": {
             "type": "string"
           }
-        }
+        },
+        "description": "GPS location"
+      },
+      "sensor-dg-mov": {
+        "title": "sensor-dg-mov",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "description": "Database entry for movement sensors"
       }
     }
   }
