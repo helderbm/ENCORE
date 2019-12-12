@@ -98,6 +98,7 @@
       "sgw": {
         "title": "sgw",
         "type": "object",
+        "description": "representation of the remote SGW object",
         "properties": {
           "id": {
             "type": "string"
@@ -105,17 +106,16 @@
           "name": {
             "type": "string"
           },
-          "long": {
-            "type": "string"
-          },
           "adress": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "long": {
+            "$ref": "#/components/schemas/gps"
           }
-        },
-        "description": "representation of the remote SGW object"
+        }
       },
       "gps": {
         "title": "gps",
