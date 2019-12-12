@@ -135,35 +135,30 @@
           }
         }
       },
-      "sensor-dg-temp": {
-        "title": "sensor-dg-temp",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        },
-        "description": "Database entry for temperature sensors"
-      },
-      "sensor-dg-hum": {
+      "sensor-dg": {
         "title": "sensor-dg-hum",
         "type": "object",
+        "description": "Database entry for humidity sensors",
         "properties": {
           "id": {
+            "type": "number"
+          },
+          "sensor-id": {
             "type": "string"
+          },
+          "dg-type": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "integer"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
           }
-        },
-        "description": "Database entry for humidity sensors"
-      },
-      "sensor-dg-ligth": {
-        "title": "sensor-dg-ligth",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        },
-        "description": "Database entry for ligth sensors"
+        }
       },
       "sgw-dg-alerts": {
         "title": "sgw-dg-alerts",
@@ -190,6 +185,9 @@
           },
           "processed": {
             "type": "boolean"
+          },
+          "raw": {
+            "type": "object"
           }
         },
         "required": [
@@ -272,16 +270,6 @@
           }
         },
         "description": "GPS location"
-      },
-      "sensor-dg-mov": {
-        "title": "sensor-dg-mov",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          }
-        },
-        "description": "Database entry for movement sensors"
       },
       "server": {
         "title": "server",
