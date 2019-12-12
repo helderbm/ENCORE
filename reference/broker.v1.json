@@ -377,6 +377,10 @@
                   "filter": {
                     "type": "object",
                     "description": "Filter records from database",
+                    "required": [
+                      "time-start",
+                      "time-end"
+                    ],
                     "properties": {
                       "time-start": {
                         "type": "integer",
@@ -393,11 +397,7 @@
                       "sensor-type": {
                         "$ref": "#/components/schemas/sensor-type"
                       }
-                    },
-                    "required": [
-                      "time-start",
-                      "time-end"
-                    ]
+                    }
                   },
                   "format": {
                     "type": "object",
@@ -405,13 +405,10 @@
                       "time-frame": {
                         "type": "number",
                         "default": 15,
-                        "enum": [
-                          15,
-                          30,
-                          45,
-                          60
-                        ],
-                        "description": "aggregate readings in X period of minutes"
+                        "description": "aggregate readings in X period of minutes, multiple of 15",
+                        "minimum": 15,
+                        "maximum": 3600,
+                        "multipleOf": 15
                       },
                       "avg": {
                         "type": "boolean",
@@ -430,7 +427,10 @@
                       }
                     }
                   }
-                }
+                },
+                "required": [
+                  "filter"
+                ]
               }
             },
             "application/xml": {
