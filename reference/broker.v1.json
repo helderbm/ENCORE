@@ -132,7 +132,7 @@
       "get": {
         "summary": "SGW details",
         "tags": [
-          "sgws"
+          "sgw"
         ],
         "responses": {
           "200": {
@@ -437,7 +437,7 @@
           }
         },
         "tags": [
-          "sgws"
+          "sgw"
         ]
       }
     },
@@ -445,8 +445,8 @@
       "get": {
         "summary": "SGW sensors data",
         "tags": [
-          "sgws",
-          "database"
+          "database",
+          "sgw"
         ],
         "responses": {
           "200": {
@@ -713,9 +713,6 @@
       "parameters": [],
       "get": {
         "summary": "List SGWS",
-        "tags": [
-          "sgws"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -869,6 +866,9 @@
             "name": "api-ver",
             "description": "API-VER, default is latest stable"
           }
+        ],
+        "tags": [
+          "sgws"
         ]
       }
     },
@@ -888,8 +888,8 @@
       "get": {
         "summary": "SGW alerts history",
         "tags": [
-          "sgws",
-          "database"
+          "database",
+          "sgw"
         ],
         "responses": {
           "200": {
@@ -1202,7 +1202,7 @@
           "description": ""
         },
         "tags": [
-          "sgws"
+          "sgw"
         ]
       }
     }
