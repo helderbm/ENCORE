@@ -27,7 +27,8 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Token return by server after authentication process"
+                "description": "Token return by server after authentication process",
+                "required": true
               },
               "request-id": {
                 "schema": {
@@ -121,33 +122,96 @@
       },
       "parameters": []
     },
-    "/sgws/{uuid}": {
+    "/sgws/{id}": {
       "get": {
         "summary": "SGWS endpoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sgw": {
+                      "$ref": "#/components/schemas/sgw-info"
+                    },
+                    "sensors": {
+                      "$ref": "#/components/schemas/sgw-sensors"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
         "operationId": "get-sgws",
-        "description": "Endpoint representing the smart gateways on the field"
+        "description": "Endpoint representing the smart gateways on the field",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver"
+          }
+        ]
       },
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "uuid",
+          "name": "id",
           "in": "path",
           "required": true
         }
       ]
     },
-    "/sgws/sensors": {
+    "/sgws/{id}/sensors/{sensorId}": {
       "get": {
         "summary": "SENSORS endoint",
         "tags": [],
         "responses": {},
         "operationId": "get-sgws-sensors",
         "description": "Endpoint representing the sensors instaled on smart gateways on the field"
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sensorId",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
     "/login": {
       "get": {
@@ -196,7 +260,7 @@
         ]
       }
     },
-    "/sgws/list": {
+    "/sgws": {
       "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
@@ -212,18 +276,62 @@
                     "$ref": "#/components/schemas/sgw-info"
                   }
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/sgw-info"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process",
+                "required": true
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "operationId": "get-sgws-{list}",
-        "description": "Simple list of all SGWS, depending on login permissions",
+        "description": "End point representing all SGWS, depending on login permissions",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "filter": {
+                    "type": "object",
+                    "properties": {
+                      "online": {
+                        "type": "boolean"
+                      },
+                      "alerts": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
               }
             },
             "application/xml": {
@@ -232,8 +340,35 @@
                 "properties": {}
               }
             }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver"
           }
-        }
+        ]
       }
     }
   },
@@ -352,22 +487,6 @@
           "description",
           "processed"
         ]
-      },
-      "sgw-sensors": {
-        "title": "sgw",
-        "type": "object",
-        "description": "Detail Model representation of the remote SGW object with sensors",
-        "properties": {
-          "sgw": {
-            "$ref": "#/components/schemas/sgw-info"
-          },
-          "sensors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/sensor"
-            }
-          }
-        }
       },
       "gps": {
         "title": "gps",
