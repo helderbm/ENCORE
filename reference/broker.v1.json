@@ -272,6 +272,7 @@
               "application/json": {
                 "schema": {
                   "type": "array",
+                  "description": "List of SGWS, depending on login permissions\n",
                   "items": {
                     "$ref": "#/components/schemas/sgw-info"
                   }
@@ -366,7 +367,8 @@
               "type": "string"
             },
             "in": "header",
-            "name": "api-ver"
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
           }
         ]
       }
@@ -421,7 +423,21 @@
               "type": "object"
             }
           }
-        }
+        },
+        "required": [
+          "id",
+          "mac",
+          "name",
+          "last-comm",
+          "manufactor",
+          "model",
+          "LQI",
+          "RSSI",
+          "battery-level",
+          "tecnology",
+          "type",
+          "endpoints"
+        ]
       },
       "sensor-dg": {
         "title": "sensor-dg-hum",
@@ -446,7 +462,14 @@
               "type": "number"
             }
           }
-        }
+        },
+        "required": [
+          "id",
+          "sensor-id",
+          "dg-type",
+          "timestamp",
+          "values"
+        ]
       },
       "sgw-alerts": {
         "title": "sgw-dg-alerts",
@@ -491,6 +514,7 @@
       "gps": {
         "title": "gps",
         "type": "object",
+        "description": "GPS location",
         "properties": {
           "lat": {
             "type": "string"
@@ -499,11 +523,15 @@
             "type": "string"
           }
         },
-        "description": "GPS location"
+        "required": [
+          "lat",
+          "long"
+        ]
       },
       "server": {
         "title": "server",
         "type": "object",
+        "description": "List of Cloud Broker Server capabilities and status",
         "properties": {
           "id": {
             "type": "string"
@@ -515,7 +543,11 @@
             "$ref": "#/components/schemas/encryption-supported"
           }
         },
-        "description": "List of Cloud Broker Server capabilities and status"
+        "required": [
+          "id",
+          "timestamp",
+          "encryption"
+        ]
       },
       "encryption-supported": {
         "title": "encryption-types",
@@ -533,6 +565,7 @@
       "sensor-type": {
         "title": "sensor-type",
         "type": "object",
+        "description": "Model of sensor capabilities",
         "properties": {
           "ligth": {
             "type": "boolean"
@@ -553,11 +586,19 @@
             "type": "boolean"
           }
         },
-        "description": "Model of sensor capabilities"
+        "required": [
+          "ligth",
+          "temp",
+          "mov",
+          "hum",
+          "alarm",
+          "co2"
+        ]
       },
       "sgw-info": {
         "title": "sgw-info",
         "type": "object",
+        "description": "Simple Model representation of the remote SGW object",
         "properties": {
           "id": {
             "type": "string"
@@ -596,7 +637,17 @@
             }
           }
         },
-        "description": "Simple Model representation of the remote SGW object"
+        "required": [
+          "id",
+          "name",
+          "hw-ver",
+          "cluster",
+          "group",
+          "last-comm",
+          "sofware-ver",
+          "public-ip",
+          "local-ip"
+        ]
       }
     }
   }
