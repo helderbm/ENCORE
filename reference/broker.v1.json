@@ -17,7 +17,7 @@
   "paths": {
     "/server": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "SERVER endpoint",
         "tags": [],
         "responses": {},
         "operationId": "get-server"
@@ -25,7 +25,7 @@
     },
     "/sgws": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "SGWS endpoint",
         "tags": [],
         "responses": {},
         "operationId": "get-sgws"
@@ -33,7 +33,7 @@
     },
     "/db": {
       "get": {
-        "summary": "Your GET endpoint",
+        "summary": "DB endpoint",
         "tags": [],
         "responses": {},
         "operationId": "get-db"
