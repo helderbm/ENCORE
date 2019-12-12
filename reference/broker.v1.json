@@ -124,8 +124,14 @@
           "tecnology": {
             "type": "boolean"
           },
-          "capabilities": {
-            "$ref": "#/components/schemas/sensor-dg-temp"
+          "type": {
+            "$ref": "#/components/schemas/sensor-type"
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           }
         }
       },
@@ -213,7 +219,7 @@
               "type": "string"
             }
           },
-          "long": {
+          "gps": {
             "$ref": "#/components/schemas/gps"
           },
           "encryption": {
@@ -230,6 +236,27 @@
             "items": {
               "$ref": "#/components/schemas/sensor"
             }
+          },
+          "local-ip": {
+            "type": "string"
+          },
+          "public-ip": {
+            "type": "string"
+          },
+          "sofware-ver": {
+            "type": "string"
+          },
+          "last-comm": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "cluster": {
+            "type": "string"
+          },
+          "hw-ver": {
+            "type": "string"
           }
         }
       },
