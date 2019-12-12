@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://cloud.spacloud.eu/public/828f269301f96"
     }
   ],
   "paths": {
