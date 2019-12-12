@@ -42,5 +42,87 @@
         "description": "Endpoint representing the sensors instaled on smart gateways on the field"
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "sensor": {
+        "title": "sensor",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "sensor-dg-temp": {
+        "title": "dg-temp",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "sensor-dg-hum": {
+        "title": "dg-hum",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "sensor-dg-ligth": {
+        "title": "dg-ligth",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "sgw-alerts": {
+        "title": "dg-alerts",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "sgw": {
+        "title": "sgw",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "long": {
+            "type": "string"
+          },
+          "adress": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "gps": {
+        "title": "gps",
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "string"
+          },
+          "long": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
 }
