@@ -231,7 +231,24 @@
             "name": "api-ver",
             "description": "API-VER, default is latest stable"
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "examples": {}
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": ""
+        }
       },
       "parameters": [
         {
@@ -275,7 +292,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/sensor"
+                  "$ref": "#/components/schemas/sensor-dg"
                 }
               }
             }
@@ -349,7 +366,72 @@
             "name": "api-ver",
             "description": "API-VER, default is latest stable"
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "Filter records from database",
+                "properties": {
+                  "filter": {
+                    "type": "object",
+                    "required": [
+                      "time-start",
+                      "time-end"
+                    ],
+                    "description": "Filter records from database",
+                    "properties": {
+                      "time-start": {
+                        "type": "integer",
+                        "description": "Timestamp of first record"
+                      },
+                      "time-end": {
+                        "type": "integer",
+                        "description": "Timestamp of last record"
+                      },
+                      "max-records": {
+                        "type": "integer",
+                        "description": "number of max records return"
+                      },
+                      "sensor-type": {
+                        "$ref": "#/components/schemas/sensor-type"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filter": {
+                    "type": "object",
+                    "description": "Filter records from database",
+                    "properties": {
+                      "time-start": {
+                        "type": "integer",
+                        "description": "Timestamp of first record"
+                      },
+                      "time-end": {
+                        "type": "integer",
+                        "description": "Timestamp of last record"
+                      },
+                      "max-records": {
+                        "type": "integer",
+                        "description": "number of max records return"
+                      },
+                      "sensor-type": {
+                        "$ref": "#/components/schemas/sensor-type"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "parameters": [
         {
@@ -708,6 +790,12 @@
         "requestBody": {
           "content": {
             "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/xml": {
               "schema": {
                 "type": "object",
                 "properties": {}
