@@ -124,7 +124,7 @@
     },
     "/sgws/{id}": {
       "get": {
-        "summary": "SGWS endpoint",
+        "summary": "SGWS.ID endpoint",
         "tags": [],
         "responses": {
           "200": {
@@ -432,7 +432,7 @@
     },
     "/sgws/{id}/dg": {
       "get": {
-        "summary": "SGWS.DG endoint",
+        "summary": "SGWS.ID.DG endoint",
         "tags": [],
         "responses": {
           "200": {
@@ -866,7 +866,7 @@
         }
       ],
       "get": {
-        "summary": "SGWS.ALERTS endpoint",
+        "summary": "SGWS.ID.ALERTS endpoint",
         "tags": [],
         "responses": {
           "200": {
