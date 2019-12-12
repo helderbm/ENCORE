@@ -123,6 +123,9 @@
           },
           "tecnology": {
             "type": "boolean"
+          },
+          "capabilities": {
+            "$ref": "#/components/schemas/sensor-dg-temp"
           }
         }
       },
