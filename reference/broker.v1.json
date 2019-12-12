@@ -707,6 +707,66 @@
         "tags": [
           "login"
         ]
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-login",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-api",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ],
+        "description": "connection detais"
       }
     },
     "/sgws": {
