@@ -739,6 +739,16 @@
                     }
                   }
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "last-login": {
+                      "type": "integer"
+                    }
+                  }
+                }
               }
             }
           },
