@@ -87,12 +87,6 @@
                 "type": "object",
                 "properties": {}
               }
-            },
-            "text/html": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
             }
           }
         },
@@ -127,7 +121,7 @@
       },
       "parameters": []
     },
-    "/sgws": {
+    "/sgws/{uuid}": {
       "get": {
         "summary": "SGWS endpoint",
         "tags": [],
@@ -135,7 +129,16 @@
         "operationId": "get-sgws",
         "description": "Endpoint representing the smart gateways on the field"
       },
-      "parameters": []
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "uuid",
+          "in": "path",
+          "required": true
+        }
+      ]
     },
     "/sgws/sensors": {
       "get": {
@@ -193,15 +196,8 @@
         ]
       }
     },
-    "/sgws/{list}": {
-      "parameters": [
-        {
-          "type": "string",
-          "name": "list",
-          "in": "path",
-          "required": true
-        }
-      ],
+    "/sgws/list": {
+      "parameters": [],
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
@@ -213,7 +209,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/sgw-info"
                   }
                 }
               }
@@ -221,7 +217,23 @@
           }
         },
         "operationId": "get-sgws-{list}",
-        "description": "List of SGWS accessible depending on login permissions"
+        "description": "Simple list of all SGWS, depending on login permissions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
       }
     }
   },
