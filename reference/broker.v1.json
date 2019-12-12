@@ -713,6 +713,7 @@
               "application/xml": {
                 "schema": {
                   "type": "array",
+                  "description": "List of SGWS, depending on login permissions",
                   "items": {
                     "$ref": "#/components/schemas/sgw-info"
                   }
