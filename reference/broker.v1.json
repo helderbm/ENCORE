@@ -21,48 +21,109 @@
         "tags": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process"
+              },
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "": {
+            "description": "Response with server info",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process"
+              },
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
           }
         },
         "operationId": "get-server",
         "description": "Information regarding Cloud Server",
         "requestBody": {
+          "description": "Request parameters to be used in future",
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  },
-                  "request-id": {
-                    "type": "string"
-                  },
-                  "api-ver": {
-                    "type": "string"
-                  }
-                }
+                "properties": {}
               }
             },
             "application/xml": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "token": {
-                    "type": "string"
-                  },
-                  "request-id": {
-                    "type": "string"
-                  },
-                  "api-ver": {
-                    "type": "string"
-                  }
-                }
+                "properties": {}
+              }
+            },
+            "text/html": {
+              "schema": {
+                "type": "object",
+                "properties": {}
               }
             }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "description": "Token return by server after authentication process"
           },
-          "description": ""
-        }
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "1"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ]
       }
     },
     "/sgws": {
@@ -81,6 +142,14 @@
         "responses": {},
         "operationId": "get-sgws-sensors",
         "description": "Endpoint representing the sensors instaled on smart gateways on the field"
+      }
+    },
+    "/login": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-login"
       }
     }
   },
