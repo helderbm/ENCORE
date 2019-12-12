@@ -288,13 +288,77 @@
         "operationId": "post-sgws-{id}",
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sgw-info"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/sgw-info"
+                }
+              }
+            },
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the post HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "server api ver"
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/err-codes"
+                }
+              }
+            },
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token return by server after authentication process"
+              },
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the post HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "server api ver"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
           }
         },
         "description": "Remote SGW operation",
@@ -331,19 +395,35 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "action": {
-                    "type": "string"
+                  "actions": {
+                    "type": "object",
+                    "properties": {
+                      "action": {
+                        "type": "string"
+                      },
+                      "parms": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
                   },
-                  "parms": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
+                  "update": {
+                    "type": "object",
+                    "properties": {
+                      "gps": {
+                        "$ref": "#/components/schemas/gps"
+                      },
+                      "adress": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
-                },
-                "required": [
-                  "action"
-                ]
+                }
               }
             }
           }
@@ -565,9 +645,9 @@
       ]
     },
     "/login": {
-      "get": {
-        "summary": "Your GET endpoint",
-        "tags": [],
+      "post": {
+        "summary": "Login",
+        "operationId": "post-login",
         "responses": {
           "200": {
             "description": "OK",
@@ -576,27 +656,13 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Token to be used in future requests",
-                "required": true
+                "description": "Token to be used in future commonications"
               },
               "api-ver": {
                 "schema": {
                   "type": "string"
                 },
-                "description": "API-VER, default is latest stable",
-                "required": true
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/server"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/server"
-                }
+                "description": "server api"
               }
             }
           },
@@ -604,25 +670,24 @@
             "description": "Forbidden"
           }
         },
-        "operationId": "get-login",
+        "description": "Loging to cloud broker",
+        "requestBody": {},
         "parameters": [
           {
             "schema": {
               "type": "string"
             },
             "in": "header",
-            "name": "user-id",
-            "required": true,
-            "description": "User id"
+            "name": "user",
+            "required": true
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "header",
-            "name": "pass-id",
-            "required": true,
-            "description": "User password"
+            "name": "password",
+            "required": true
           }
         ]
       }
