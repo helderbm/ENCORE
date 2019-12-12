@@ -89,7 +89,7 @@
       "sensor": {
         "title": "sensor",
         "type": "object",
-        "description": "Sensor description",
+        "description": "Sensor model description",
         "properties": {
           "id": {
             "type": "string"
@@ -138,7 +138,7 @@
       "sensor-dg": {
         "title": "sensor-dg-hum",
         "type": "object",
-        "description": "Database entry for humidity sensors",
+        "description": "Database entry for sensors readings",
         "properties": {
           "id": {
             "type": "number"
@@ -203,7 +203,7 @@
       "sgw": {
         "title": "sgw",
         "type": "object",
-        "description": "representation of the remote SGW object",
+        "description": "Representation of the remote SGW object",
         "properties": {
           "id": {
             "type": "string"
@@ -284,16 +284,18 @@
           "encryption": {
             "$ref": "#/components/schemas/encryption-supported"
           }
-        }
+        },
+        "description": "Server capabilities and status"
       },
       "encryption-supported": {
         "title": "encryption-types",
         "type": "object",
+        "description": "Type of encryption communications supported",
         "properties": {
-          "typ1": {
+          "MCRYPT_RIJNDAEL_256": {
             "type": "boolean"
           },
-          "type2": {
+          "blockchain": {
             "type": "boolean"
           }
         }
@@ -320,7 +322,8 @@
           "co2": {
             "type": "boolean"
           }
-        }
+        },
+        "description": "Sensors capabilities"
       }
     }
   }
