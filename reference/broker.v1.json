@@ -21,7 +21,7 @@
   "paths": {
     "/server": {
       "get": {
-        "summary": "Server details",
+        "summary": "details",
         "tags": [
           "server"
         ],
@@ -130,7 +130,7 @@
     },
     "/sgws/{id}": {
       "get": {
-        "summary": "SGW details",
+        "summary": "details",
         "tags": [
           "sgw"
         ],
@@ -292,7 +292,7 @@
         }
       ],
       "post": {
-        "summary": "SGW send command",
+        "summary": "send command",
         "operationId": "post-sgws-{id}",
         "responses": {
           "200": {
@@ -443,7 +443,7 @@
     },
     "/sgws/{id}/dg": {
       "get": {
-        "summary": "SGW sensors data",
+        "summary": "sensors data",
         "tags": [
           "database",
           "sgw"
@@ -660,7 +660,7 @@
     },
     "/login": {
       "post": {
-        "summary": "Login to server",
+        "summary": "login to server",
         "operationId": "post-login",
         "responses": {
           "200": {
@@ -712,7 +712,7 @@
     "/sgws": {
       "parameters": [],
       "get": {
-        "summary": "List SGWS",
+        "summary": "list",
         "responses": {
           "200": {
             "description": "OK",
@@ -886,7 +886,7 @@
         }
       ],
       "get": {
-        "summary": "SGW alerts history",
+        "summary": "alerts history",
         "tags": [
           "database",
           "sgw"
@@ -1050,7 +1050,7 @@
         "description": "Return alerts store in the Database concerning a specific SGW, if no BODY is send the last 100 rows will be return"
       },
       "post": {
-        "summary": "Modify SGW alert entry",
+        "summary": "modify alert entry",
         "operationId": "post-sgws-{id}-alerts",
         "responses": {
           "200": {
