@@ -655,7 +655,7 @@
     },
     "/login": {
       "post": {
-        "summary": "login to server",
+        "summary": "authenticate",
         "operationId": "post-login",
         "responses": {
           "200": {
@@ -704,20 +704,16 @@
         ]
       },
       "get": {
-        "summary": "",
+        "summary": "details",
         "operationId": "get-login",
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "403": {
-            "description": "Forbidden",
+            "description": "OK",
             "headers": {
               "token": {
                 "schema": {
                   "type": "string"
                 },
-                "required": true,
                 "description": "Token return by server after authentication process"
               },
               "response-id": {
@@ -733,6 +729,10 @@
                 "description": "API-VER, default is latest stable"
               }
             }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {}
           }
         },
         "parameters": [
