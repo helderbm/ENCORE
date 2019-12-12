@@ -134,7 +134,8 @@
         "responses": {},
         "operationId": "get-sgws",
         "description": "Endpoint representing the smart gateways on the field"
-      }
+      },
+      "parameters": []
     },
     "/sgws/sensors": {
       "get": {
@@ -149,8 +150,63 @@
       "get": {
         "summary": "Your GET endpoint",
         "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Token to be used in future requests"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-login",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "user-id",
+            "required": true,
+            "description": "User id"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "pass-id",
+            "required": true,
+            "description": "User password"
+          }
+        ]
+      }
+    },
+    "/sgws/{list}": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "list",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
         "responses": {},
-        "operationId": "get-login"
+        "operationId": "get-sgws-{list}"
       }
     }
   },
