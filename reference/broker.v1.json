@@ -143,10 +143,64 @@
                   }
                 }
               }
+            },
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
           }
         },
         "operationId": "get-sgws",
@@ -157,21 +211,25 @@
               "type": "string"
             },
             "in": "header",
-            "name": "token"
+            "name": "token",
+            "required": true,
+            "description": "Token return by server after authentication process"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "header",
-            "name": "response-id"
+            "name": "response-id",
+            "description": "unique id to be used in the response HEADER"
           },
           {
             "schema": {
               "type": "string"
             },
             "in": "header",
-            "name": "api-ver"
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
           }
         ]
       },
@@ -190,9 +248,82 @@
       "get": {
         "summary": "SENSORS endoint",
         "tags": [],
-        "responses": {},
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          }
+        },
         "operationId": "get-sgws-sensors",
-        "description": "Endpoint representing the sensors instaled on smart gateways on the field"
+        "description": "Endpoint representing the sensors instaled on smart gateways on the field",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ]
       },
       "parameters": [
         {
@@ -225,7 +356,15 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "Token to be used in future requests"
+                "description": "Token to be used in future requests",
+                "required": true
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable",
+                "required": true
               }
             },
             "content": {
@@ -233,8 +372,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/server"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/server"
+                }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "operationId": "get-login",
@@ -371,6 +518,86 @@
             "description": "API-VER, default is latest stable"
           }
         ]
+      }
+    },
+    "/sgws/{id}/alerts": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token return by server after authentication process"
+              },
+              "response-api": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "operationId": "get-sgws-{id}-alerts",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-api",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -541,12 +768,17 @@
           },
           "encryption": {
             "$ref": "#/components/schemas/encryption-supported"
+          },
+          "api-ver": {
+            "type": "string",
+            "description": ""
           }
         },
         "required": [
           "id",
           "timestamp",
-          "encryption"
+          "encryption",
+          "api-ver"
         ]
       },
       "encryption-supported": {
