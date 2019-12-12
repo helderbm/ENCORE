@@ -728,6 +728,18 @@
                 },
                 "description": "API-VER, default is latest stable"
               }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "last-login": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
             }
           },
           "403": {
