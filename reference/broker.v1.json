@@ -124,7 +124,8 @@
             "description": "API-VER, default is latest stable"
           }
         ]
-      }
+      },
+      "parameters": []
     },
     "/sgws": {
       "get": {
