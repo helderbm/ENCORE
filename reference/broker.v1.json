@@ -376,10 +376,6 @@
                 "properties": {
                   "filter": {
                     "type": "object",
-                    "required": [
-                      "time-start",
-                      "time-end"
-                    ],
                     "description": "Filter records from database",
                     "properties": {
                       "time-start": {
@@ -396,6 +392,41 @@
                       },
                       "sensor-type": {
                         "$ref": "#/components/schemas/sensor-type"
+                      }
+                    },
+                    "required": [
+                      "time-start",
+                      "time-end"
+                    ]
+                  },
+                  "format": {
+                    "type": "object",
+                    "properties": {
+                      "time-frame": {
+                        "type": "number",
+                        "default": 15,
+                        "enum": [
+                          15,
+                          30,
+                          45,
+                          60
+                        ],
+                        "description": "aggregate readings in X period of minutes"
+                      },
+                      "avg": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "return frame average of values"
+                      },
+                      "high": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "return frame highest value"
+                      },
+                      "low": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "return frame lowest value"
                       }
                     }
                   }
@@ -872,7 +903,7 @@
         ]
       },
       "sensor-dg": {
-        "title": "sensor-dg-hum",
+        "title": "sensor-dg",
         "type": "object",
         "description": "Model for Database entries of sensors readings",
         "properties": {
