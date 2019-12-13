@@ -700,7 +700,8 @@
           }
         ],
         "tags": [
-          "login"
+          "login",
+          "server"
         ]
       },
       "get": {
@@ -783,7 +784,11 @@
             "description": "API-VER, default is latest stable"
           }
         ],
-        "description": "connection detais"
+        "description": "connection detais",
+        "tags": [
+          "server",
+          "login"
+        ]
       }
     },
     "/sgws": {
