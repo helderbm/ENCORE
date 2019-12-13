@@ -21,7 +21,7 @@
   "paths": {
     "/server": {
       "get": {
-        "summary": "details",
+        "summary": "server details",
         "tags": [
           "server"
         ],
@@ -705,7 +705,7 @@
         ]
       },
       "get": {
-        "summary": "details",
+        "summary": "connection details",
         "operationId": "get-login",
         "responses": {
           "200": {
