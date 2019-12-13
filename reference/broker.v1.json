@@ -1528,7 +1528,8 @@
                 }
               }
             }
-          }
+          },
+          "description": "enables or disables the subscrition of events/changes from SGW"
         }
       }
     }
