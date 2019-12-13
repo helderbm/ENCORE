@@ -1303,7 +1303,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "oken return by server after authentication process"
+                "description": "token return by server after authentication process"
               },
               "request-id": {
                 "schema": {
@@ -1334,6 +1334,34 @@
                     }
                   }
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "prop-change": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
               }
             }
           },
@@ -1344,7 +1372,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "oken return by server after authentication process"
+                "description": "token return by server after authentication process"
               },
               "request-id": {
                 "schema": {
@@ -1379,7 +1407,7 @@
           }
         },
         "operationId": "get-sgw-{id}-subscribe",
-        "description": "enables receiving real data from SGW with websocks. If REST is used then the the last changes will be return",
+        "description": "retriveis real data from SGW with websocks. If REST is used then the the last changes will be return",
         "parameters": [
           {
             "schema": {
@@ -1387,7 +1415,7 @@
             },
             "in": "header",
             "name": "token",
-            "description": "oken return by server after authentication process"
+            "description": "token return by server after authentication process"
           },
           {
             "schema": {
@@ -1406,6 +1434,102 @@
             "description": "API-VER, default is latest stable"
           }
         ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-sgw-{id}-subscribe",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "token return by server after authentication process"
+              },
+              "response-api": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "token return by server after authentication process"
+              },
+              "response-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id to be used in the response HEADER"
+              },
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "API-VER, default is latest stable"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "enables receiving real data from SGW",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "response-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "api-ver",
+            "description": "API-VER, default is latest stable"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "enable": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
