@@ -1298,7 +1298,7 @@
         }
       ],
       "get": {
-        "summary": "subscribe",
+        "summary": "last subscribe changes",
         "tags": [
           "sgw"
         ],
@@ -1443,7 +1443,7 @@
         ]
       },
       "post": {
-        "summary": "",
+        "summary": "subscribe to SGW",
         "operationId": "post-sgw-{id}-subscribe",
         "responses": {
           "200": {
