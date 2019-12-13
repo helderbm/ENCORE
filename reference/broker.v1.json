@@ -1294,7 +1294,9 @@
       ],
       "get": {
         "summary": "subscribe",
-        "tags": [],
+        "tags": [
+          "sgw"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1530,7 +1532,10 @@
             }
           },
           "description": "enables or disables the subscrition of events/changes from SGW"
-        }
+        },
+        "tags": [
+          "sgw"
+        ]
       }
     }
   },
