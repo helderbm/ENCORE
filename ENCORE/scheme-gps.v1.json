@@ -1,0 +1,20 @@
+{
+"title": "gps",
+        "type": "object",
+        "description": "GPS location",
+        "properties": {
+          "lat": {
+            "type": "string"
+          },
+          "long": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "lat",
+          "long"
+        ],
+        "x-tags": [
+          "models"
+        ]
+}

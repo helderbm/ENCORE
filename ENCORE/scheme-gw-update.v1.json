@@ -1,0 +1,44 @@
+{
+  "title": "gw-update",
+  "type": "object",
+  "x-tags": [
+    "models"
+  ],
+  "description": "JSON object with information for updating an GW",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Friendly name of this GW"
+    },
+    "cluster": {
+      "type": "string",
+      "description": "GW belong to this cluster"
+    },
+    "group": {
+      "type": "string",
+      "description": "GW belong to this group"
+    },
+    "sofware-ver": {
+      "type": "string",
+      "description": "GW software version"
+    },
+    "public-ip": {
+      "type": "string",
+      "description": "Internet IP of the GW/router"
+    },
+    "local-ip": {
+      "type": "string",
+      "description": "Local network IP of the GW"
+    },
+    "gps": {
+      "$ref": "./scheme-gps.v1.json"
+    },
+    "adress": {
+      "type": "array",
+      "description": "array of strings for the address of the house where the GW is located",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

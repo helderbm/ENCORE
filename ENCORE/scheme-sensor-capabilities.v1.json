@@ -1,0 +1,41 @@
+{
+  "title": "scheme-sensor-capabilities",
+  "type": "object",
+  "properties": {
+    "ligth": {
+      "type": "boolean"
+    },
+    "temp": {
+      "type": "boolean"
+    },
+    "mov": {
+      "type": "boolean"
+    },
+    "hum": {
+      "type": "boolean"
+    },
+    "co2": {
+      "type": "boolean"
+    },
+    "ppm": {
+      "type": "boolean"
+    },
+    "no2": {
+      "type": "boolean"
+    },
+    "flood": {
+      "type": "boolean"
+    },
+    "dummy": {
+      "type": "boolean",
+      "default": "true"
+    },
+    "internal_temp": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "dummy"
+  ],
+  "description": "sensor capabilities"
+}

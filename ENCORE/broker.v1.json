@@ -1,0 +1,3234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ENCORE REST API",
+    "version": "V1",
+    "description": "<div id=\"rref\" rref=\"https://spacloud.eu/uuid/d1e1ac9ea2783?action=download\"></div>",
+    "contact": {
+      "name": "Helder Moreira",
+      "email": "helder@spa.pt",
+      "url": "www.spa.pt"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "[POST] /login",
+        "operationId": "post-server-login",
+        "responses": {
+          "200": {
+            "description": "As a result of a successful authentication a new Token is created for this HTTPS session and is require to be sent in the header of future API REST operations",
+            "headers": {
+              "api-ver": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "server current api",
+                "required": true
+              },
+              "token": {
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "Token to be used in future requests"
+              },
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object containing server information",
+                  "properties": {
+                    "value": {
+                      "required": [
+                        "id",
+                        "api-ver",
+                        "encryption",
+                        "timestamp"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "uuid of this server"
+                        },
+                        "api-ver": {
+                          "type": "string",
+                          "description": "current REST API version used by the cloud server"
+                        },
+                        "encryption": {
+                          "title": "encryption-types",
+                          "type": "object",
+                          "description": "Type of encryption communications supported by the loud server",
+                          "x-tags": [
+                            "models"
+                          ],
+                          "x-examples": {},
+                          "properties": {
+                            "MCRYPT_RIJNDAEL_256": {
+                              "type": "boolean",
+                              "default": "false"
+                            },
+                            "blockchain": {
+                              "type": "boolean",
+                              "default": "false"
+                            }
+                          },
+                          "required": [
+                            "MCRYPT_RIJNDAEL_256",
+                            "blockchain"
+                          ]
+                        },
+                        "timestamp": {
+                          "type": "integer",
+                          "description": "Timestamp of the cloud server"
+                        }
+                      },
+                      "description": "Cloud server information",
+                      "x-tags": [
+                        "models"
+                      ],
+                      "type": "object",
+                      "title": "server"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "response",
+                    "request"
+                  ]
+                },
+                "examples": {
+                  "login ok and return server information": {
+                    "value": {
+                      "value": {
+                        "id": "6ahjdfasd0983",
+                        "timestamp": 1586528517,
+                        "encryption": {
+                          "MCRYPT_RIJNDAEL_256": false,
+                          "blockchain": false
+                        },
+                        "api-ver": "0.2"
+                      },
+                      "response": "200",
+                      "request": "POST"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Loging to cloud server",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "name",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "type": "object",
+                "title": "scheme-login-use"
+              }
+            }
+          },
+          "description": "Send credentials for login"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "tags": [
+          "server"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request POST \\\r\n  --url https://spacloud.eu/public/9786582aaf93e/login \\\r\n  --data '{\"name\":\"string\",\"password\":\"string\"}'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method POST \\\r\n  --body-data '{\"name\":\"string\",\"password\":\"string\"}' \\\r\n  --output-document \\\r\n  - https://spacloud.eu/public/9786582aaf93e/login"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/login\",\r\n  \"method\": \"POST\",\r\n  \"headers\": {},\r\n  \"processData\": false,\r\n  \"data\": \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\"\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = JSON.stringify({\r\n  \"name\": \"string\",\r\n  \"password\": \"string\"\r\n});\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"POST\", \"https://spacloud.eu/public/9786582aaf93e/login\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/login\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"POST\",\r\n  CURLOPT_POSTFIELDS => \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\",\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nMediaType mediaType = MediaType.parse(\"application/json\");\r\nRequestBody body = RequestBody.create(mediaType, \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\");\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/login\")\r\n  .post(body)\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\npayload = \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\"\r\n\r\nconn.request(\"POST\", \"/public/9786582aaf93e/login\", payload)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"POST\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/login\");\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\");\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      }
+    },
+    "/gws/{gw-id}": {
+      "get": {
+        "summary": "[GET] /gws/{gw-id}",
+        "operationId": "get-sgw",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1gws/get/responses/200/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "404"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "description": "End point for retriving information from one GW",
+        "tags": [
+          "gws"
+        ],
+        "requestBody": {
+          "description": ""
+        },
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request GET \\\r\n  --url https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340 \\\r\n  --header 'token: 43rtdfs3'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method GET \\\r\n  --header 'token: 43rtdfs3' \\\r\n  --output-document \\\r\n  - https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/login\",\r\n  \"method\": \"POST\",\r\n  \"headers\": {},\r\n  \"processData\": false,\r\n  \"data\": \"{\\\"name\\\":\\\"string\\\",\\\"password\\\":\\\"string\\\"}\"\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = null;\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"GET\", \"https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340\");\r\nxhr.setRequestHeader(\"token\", \"43rtdfs3\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"GET\",\r\n  CURLOPT_HTTPHEADER => array(\r\n    \"token: 43rtdfs3\"\r\n  ),\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340\")\r\n  .get()\r\n  .addHeader(\"token\", \"43rtdfs3\")\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\nheaders = { 'token': \"43rtdfs3\" }\r\n\r\nconn.request(\"GET\", \"/public/9786582aaf93e/gws/ef43e2a340\", headers=headers)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"GET\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/gws/ef43e2a340\");\r\n\r\nstruct curl_slist *headers = NULL;\r\nheaders = curl_slist_append(headers, \"token: 43rtdfs3\");\r\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "[PUT] /gws/{gw-id}",
+        "operationId": "put-sgw",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "PUT"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "PUT"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "PUT"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "404"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "PUT"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          }
+        },
+        "description": "End point for changing informationof of GW",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Friendly name of this GW"
+                      },
+                      "cluster": {
+                        "type": "string",
+                        "description": "GW belong to this cluster"
+                      },
+                      "group": {
+                        "type": "string",
+                        "description": "GW belong to this group"
+                      },
+                      "sofware-ver": {
+                        "type": "string",
+                        "description": "GW software version"
+                      },
+                      "public-ip": {
+                        "type": "string",
+                        "description": "Internet IP of the GW/router"
+                      },
+                      "local-ip": {
+                        "type": "string",
+                        "description": "Local network IP of the GW"
+                      },
+                      "gps": {
+                        "title": "gps",
+                        "type": "object",
+                        "description": "GPS location",
+                        "properties": {
+                          "lat": {
+                            "type": "string"
+                          },
+                          "long": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "lat",
+                          "long"
+                        ],
+                        "x-tags": [
+                          "models"
+                        ]
+                      },
+                      "adress": {
+                        "type": "array",
+                        "description": "array of strings for the address of the house where the GW is located",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "description": "JSON object with information for updating an GW",
+                    "x-tags": [
+                      "models"
+                    ],
+                    "type": "object",
+                    "title": "gw-update"
+                  }
+                }
+              }
+            }
+          },
+          "description": "JSON object with data to be change on GW databse record"
+        },
+        "tags": [
+          "gws"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request PUT \\\r\n  --url https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e \\\r\n  --header 'content-type: application/json' \\\r\n  --header 'token: 345rfgert3453' \\\r\n  --data '{\"values\":{\"name\":\"string\",\"cluster\":\"string\",\"group\":\"string\",\"sofware-ver\":\"string\",\"public-ip\":\"string\",\"local-ip\":\"string\",\"gps\":{\"long\":\"string\",\"lat\":\"string\"},\"adress\":[\"string\"]}}'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method PUT \\\r\n  --header 'token: 345rfgert3453' \\\r\n  --header 'content-type: application/json' \\\r\n  --body-data '{\"values\":{\"name\":\"string\",\"cluster\":\"string\",\"group\":\"string\",\"sofware-ver\":\"string\",\"public-ip\":\"string\",\"local-ip\":\"string\",\"gps\":{\"long\":\"string\",\"lat\":\"string\"},\"adress\":[\"string\"]}}' \\\r\n  --output-document \\\r\n  - https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e\",\r\n  \"method\": \"PUT\",\r\n  \"headers\": {\r\n    \"token\": \"345rfgert3453\",\r\n    \"content-type\": \"application/json\"\r\n  },\r\n  \"processData\": false,\r\n  \"data\": \"{\\\"values\\\":{\\\"name\\\":\\\"string\\\",\\\"cluster\\\":\\\"string\\\",\\\"group\\\":\\\"string\\\",\\\"sofware-ver\\\":\\\"string\\\",\\\"public-ip\\\":\\\"string\\\",\\\"local-ip\\\":\\\"string\\\",\\\"gps\\\":{\\\"long\\\":\\\"string\\\",\\\"lat\\\":\\\"string\\\"},\\\"adress\\\":[\\\"string\\\"]}}\"\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = JSON.stringify({\r\n  \"values\": {\r\n    \"name\": \"string\",\r\n    \"cluster\": \"string\",\r\n    \"group\": \"string\",\r\n    \"sofware-ver\": \"string\",\r\n    \"public-ip\": \"string\",\r\n    \"local-ip\": \"string\",\r\n    \"gps\": {\r\n      \"long\": \"string\",\r\n      \"lat\": \"string\"\r\n    },\r\n    \"adress\": [\r\n      \"string\"\r\n    ]\r\n  }\r\n});\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"PUT\", \"https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e\");\r\nxhr.setRequestHeader(\"token\", \"345rfgert3453\");\r\nxhr.setRequestHeader(\"content-type\", \"application/json\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"PUT\",\r\n  CURLOPT_POSTFIELDS => \"{\\\"values\\\":{\\\"name\\\":\\\"string\\\",\\\"cluster\\\":\\\"string\\\",\\\"group\\\":\\\"string\\\",\\\"sofware-ver\\\":\\\"string\\\",\\\"public-ip\\\":\\\"string\\\",\\\"local-ip\\\":\\\"string\\\",\\\"gps\\\":{\\\"long\\\":\\\"string\\\",\\\"lat\\\":\\\"string\\\"},\\\"adress\\\":[\\\"string\\\"]}}\",\r\n  CURLOPT_HTTPHEADER => array(\r\n    \"content-type: application/json\",\r\n    \"token: 345rfgert3453\"\r\n  ),\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nMediaType mediaType = MediaType.parse(\"application/json\");\r\nRequestBody body = RequestBody.create(mediaType, \"{\\\"values\\\":{\\\"name\\\":\\\"string\\\",\\\"cluster\\\":\\\"string\\\",\\\"group\\\":\\\"string\\\",\\\"sofware-ver\\\":\\\"string\\\",\\\"public-ip\\\":\\\"string\\\",\\\"local-ip\\\":\\\"string\\\",\\\"gps\\\":{\\\"long\\\":\\\"string\\\",\\\"lat\\\":\\\"string\\\"},\\\"adress\\\":[\\\"string\\\"]}}\");\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e\")\r\n  .put(body)\r\n  .addHeader(\"token\", \"345rfgert3453\")\r\n  .addHeader(\"content-type\", \"application/json\")\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\npayload = \"{\\\"values\\\":{\\\"name\\\":\\\"string\\\",\\\"cluster\\\":\\\"string\\\",\\\"group\\\":\\\"string\\\",\\\"sofware-ver\\\":\\\"string\\\",\\\"public-ip\\\":\\\"string\\\",\\\"local-ip\\\":\\\"string\\\",\\\"gps\\\":{\\\"long\\\":\\\"string\\\",\\\"lat\\\":\\\"string\\\"},\\\"adress\\\":[\\\"string\\\"]}}\"\r\n\r\nheaders = {\r\n    'token': \"345rfgert3453\",\r\n    'content-type': \"application/json\"\r\n    }\r\n\r\nconn.request(\"PUT\", \"/public/9786582aaf93e/gws/34ef56a034e\", payload, headers)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"PUT\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/gws/34ef56a034e\");\r\n\r\nstruct curl_slist *headers = NULL;\r\nheaders = curl_slist_append(headers, \"token: 345rfgert3453\");\r\nheaders = curl_slist_append(headers, \"content-type: application/json\");\r\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_POSTFIELDS, \"{\\\"values\\\":{\\\"name\\\":\\\"string\\\",\\\"cluster\\\":\\\"string\\\",\\\"group\\\":\\\"string\\\",\\\"sofware-ver\\\":\\\"string\\\",\\\"public-ip\\\":\\\"string\\\",\\\"local-ip\\\":\\\"string\\\",\\\"gps\\\":{\\\"long\\\":\\\"string\\\",\\\"lat\\\":\\\"string\\\"},\\\"adress\\\":[\\\"string\\\"]}}\");\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      }
+    },
+    "/gws/{gw-id}/sensors/{sensor-id}/data": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sensor-id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "[GET] /gws/{gw-id}/sensors/{sensor-id}/data",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors~1%7Bsensor-id%7D~1data/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "page-number": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "number of page related to HEADER {page-size}. If the number of JSON records return is iqual to {page-size} that means the client can make another request without query parameters to retrieve next page",
+                "required": true
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors~1%7Bsensor-id%7D~1data/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "206"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {}
+          }
+        },
+        "operationId": "get-sensors-data",
+        "description": "Get {sensor-id} data connected to a {gw-id}",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "array"
+            },
+            "in": "query",
+            "name": "data-type",
+            "description": "check \"sensor capabilities model\" for available values"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 200,
+              "minimum": 1,
+              "maximum": 2000,
+              "format": "int32"
+            },
+            "in": "header",
+            "name": "page-size",
+            "description": "number of max json records to be return"
+          }
+        ],
+        "tags": [
+          "sensors"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": ""
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": ""
+          },
+          {
+            "lang": "PHP",
+            "source": ""
+          },
+          {
+            "lang": "Java",
+            "source": ""
+          },
+          {
+            "lang": "Python3",
+            "source": ""
+          },
+          {
+            "lang": "C",
+            "source": ""
+          }
+        ]
+      },
+      "post": {
+        "summary": "[POST] /gws/{gw-id}/sensors/{sensor-id}/data",
+        "operationId": "post-sensors-data",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "201"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Post {sensor-id} data connected to a {gw-id} in to the cloud Database",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "minItems": 1,
+                    "description": "values to be insert in the database, please nota there is a max of 200 records to be Posted in nthe same call",
+                    "items": {
+                      "required": [
+                        "min",
+                        "max",
+                        "avg",
+                        "readings",
+                        "time-size",
+                        "time-start",
+                        "type"
+                      ],
+                      "properties": {
+                        "min": {
+                          "type": "number",
+                          "description": "min value in the interval"
+                        },
+                        "max": {
+                          "type": "number",
+                          "description": "max value in the interval"
+                        },
+                        "avg": {
+                          "type": "number",
+                          "description": "Average value of readings"
+                        },
+                        "readings": {
+                          "type": "integer",
+                          "description": "number of reading in this interval"
+                        },
+                        "time-size": {
+                          "type": "integer",
+                          "description": "the duratioof the interval in minutes"
+                        },
+                        "time-start": {
+                          "type": "integer",
+                          "description": "The initial of the interval in the format of linux TimeStamp"
+                        },
+                        "type": {
+                          "title": "scheme-sensor-capabilities",
+                          "type": "object",
+                          "properties": {
+                            "ligth": {
+                              "type": "boolean"
+                            },
+                            "temp": {
+                              "type": "boolean"
+                            },
+                            "mov": {
+                              "type": "boolean"
+                            },
+                            "hum": {
+                              "type": "boolean"
+                            },
+                            "co2": {
+                              "type": "boolean"
+                            },
+                            "ppm": {
+                              "type": "boolean"
+                            },
+                            "no2": {
+                              "type": "boolean"
+                            },
+                            "flood": {
+                              "type": "boolean"
+                            },
+                            "dummy": {
+                              "type": "boolean",
+                              "default": "true"
+                            },
+                            "internal_temp": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "dummy"
+                          ],
+                          "description": "sensor capabilities"
+                        }
+                      },
+                      "description": "Represents the readings of a sensor in a specific time interval",
+                      "x-tags": [
+                        "models"
+                      ],
+                      "type": "object",
+                      "title": "sensor-data"
+                    }
+                  }
+                },
+                "required": [
+                  "values"
+                ]
+              }
+            }
+          },
+          "description": "New sensor data"
+        },
+        "tags": [
+          "sensors"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": ""
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": ""
+          },
+          {
+            "lang": "PHP",
+            "source": ""
+          },
+          {
+            "lang": "Java",
+            "source": ""
+          },
+          {
+            "lang": "Python3",
+            "source": ""
+          },
+          {
+            "lang": "C",
+            "source": ""
+          }
+        ]
+      }
+    },
+    "/gws/{gw-id}/alerts": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "[GET] /gws/{gw-id}/alerts",
+        "tags": [
+          "alerts"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON array containing a array of Alerts",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "maxItems": 400,
+                      "minItems": 0,
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1alerts/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON array containing a array of Alerts",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "maxItems": 400,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1alerts/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "206"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              },
+              "page-number": {
+                "schema": {
+                  "type": "number",
+                  "minimum": ""
+                },
+                "description": "page-number",
+                "required": true
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-sensors-alerts",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "all",
+                "processed",
+                "unattended"
+              ]
+            },
+            "in": "query",
+            "name": "processed",
+            "description": "select alerts that has been processed or not"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 100,
+              "minimum": 1,
+              "maximum": 400,
+              "format": "int32"
+            },
+            "in": "header",
+            "description": "number of max json records to be return",
+            "name": "page-size"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 0,
+              "minimum": "",
+              "maximum": ""
+            },
+            "in": "query",
+            "name": "after",
+            "description": "retrive alerts only created after this Timstamp"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 0,
+              "minimum": "",
+              "maximum": ""
+            },
+            "in": "query",
+            "name": "before",
+            "description": "retrive alerts only created after this Timstamp"
+          }
+        ],
+        "description": "Get alerts",
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": ""
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": ""
+          },
+          {
+            "lang": "PHP",
+            "source": ""
+          },
+          {
+            "lang": "Java",
+            "source": ""
+          },
+          {
+            "lang": "Python3",
+            "source": ""
+          },
+          {
+            "lang": "C",
+            "source": ""
+          }
+        ]
+      },
+      "post": {
+        "summary": "[POST] /gws/{gw-id}/alerts",
+        "operationId": "post-sensors-alerts",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "201"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "tags": [
+          "alerts"
+        ],
+        "description": "add new Alert(s)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "JSON object with alerts to be inseted on the Database",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "maxItems": 400,
+                    "minItems": 1,
+                    "items": {
+                      "required": [
+                        "type",
+                        "level",
+                        "description",
+                        "created_at",
+                        "processed_at",
+                        "origin"
+                      ],
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "description": "type of the alert",
+                          "enum": [
+                            "BATT",
+                            "MOV",
+                            "DOOR",
+                            "WINDOW"
+                          ]
+                        },
+                        "level": {
+                          "type": "integer",
+                          "default": 0,
+                          "description": "Level of severity of the alert",
+                          "format": "int32",
+                          "minimum": 0,
+                          "maximum": 10
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Text description of the alert"
+                        },
+                        "created_at": {
+                          "type": "integer",
+                          "default": 0,
+                          "description": "Data of the occurrence in the format of linux TimeStamp",
+                          "format": "int32"
+                        },
+                        "processed_at": {
+                          "type": "integer",
+                          "default": 0,
+                          "description": "Date of alert proessed in the format of linux TimeStamp",
+                          "format": "int32"
+                        },
+                        "origin": {
+                          "type": "string",
+                          "description": "Alert origin (sensor id, gw, etc)"
+                        }
+                      },
+                      "x-tags": [
+                        "models"
+                      ],
+                      "description": "Alert entries from GW ",
+                      "type": "object",
+                      "title": "sgw-dg-alerts"
+                    }
+                  }
+                },
+                "required": [
+                  "values"
+                ]
+              },
+              "examples": {
+                "new alert generated by a door sensor": {
+                  "value": {
+                    "values": [
+                      {
+                        "type": "DOOR",
+                        "level": 1,
+                        "description": "kitchen door open",
+                        "created_at": 1586527723,
+                        "processed_at": 0,
+                        "origin": "23fa442af"
+                      }
+                    ]
+                  }
+                },
+                "multiple alerts ": {
+                  "value": {
+                    "values": [
+                      {
+                        "type": "DOOR",
+                        "level": 1,
+                        "description": "kitchen door open",
+                        "created_at": 1586527723,
+                        "processed_at": 0,
+                        "origin": "23fa442af"
+                      },
+                      {
+                        "type": "MOV",
+                        "level": 1,
+                        "description": "Living room",
+                        "created_at": 1586527745,
+                        "processed_at": 0,
+                        "origin": "23ee324ff"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "description": "A valid JSON object with alerts to be inseted on the Database"
+        },
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": ""
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": ""
+          },
+          {
+            "lang": "PHP",
+            "source": ""
+          },
+          {
+            "lang": "Java",
+            "source": ""
+          },
+          {
+            "lang": "Python3",
+            "source": ""
+          },
+          {
+            "lang": "C",
+            "source": ""
+          }
+        ]
+      }
+    },
+    "/gws/{gw-id}/sse": {
+      "get": {
+        "summary": "[GET] /gws/{gw-id}/sse",
+        "tags": [
+          "sse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string",
+                  "description": "The server will push any new events to the cliente."
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "get-sse",
+        "description": "Server-Sent Events (server push)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": ""
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": ""
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": ""
+          },
+          {
+            "lang": "PHP",
+            "source": ""
+          },
+          {
+            "lang": "Java",
+            "source": ""
+          },
+          {
+            "lang": "Python3",
+            "source": ""
+          },
+          {
+            "lang": "C",
+            "source": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/errors": {
+      "get": {
+        "summary": "[GET] /errors",
+        "operationId": "get-errors",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object with an array of all possible error codes return by the server",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "tags": [
+          "server"
+        ],
+        "description": "List of all errors that the server can return for invalid REST requests",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request GET \\\r\n  --url https://spacloud.eu/public/9786582aaf93e/errors \\\r\n  --header 'token:asdjkk2342'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method GET \\\r\n  --header 'token:asdjkk2342' \\\r\n  --output-document \\\r\n  - https://spacloud.eu/public/9786582aaf93e/errors"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/errors\",\r\n  \"method\": \"GET\",\r\n  \"headers\": {\r\n    \"token\": \"asdjkk2342\"\r\n  }\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = null;\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"GET\", \"https://spacloud.eu/public/9786582aaf93e/errors\");\r\nxhr.setRequestHeader(\"token\", \"asdjkk2342\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/errors\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"GET\",\r\n  CURLOPT_HTTPHEADER => array(\r\n    \"token: \"\r\n  ),\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/errors\")\r\n  .get()\r\n  .addHeader(\"token\", \"asdjkk2342\")\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\nheaders = { 'token': \"asdjkk2342\" }\r\n\r\nconn.request(\"GET\", \"/public/9786582aaf93e/errors\", headers=headers)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"GET\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/errors\");\r\n\r\nstruct curl_slist *headers = NULL;\r\nheaders = curl_slist_append(headers, \"token: asdjkk2342\");\r\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      }
+    },
+    "/versions": {
+      "get": {
+        "summary": "[GET] /versions",
+        "tags": [
+          "server"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object with an array containing all API REST versions and modifications",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "x-tags": [
+                          "models"
+                        ],
+                        "required": [
+                          "version",
+                          "date",
+                          "changes"
+                        ],
+                        "properties": {
+                          "version": {
+                            "type": "string",
+                            "description": "vaersion number"
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "version date"
+                          },
+                          "changes": {
+                            "type": "string",
+                            "description": "changes since last version"
+                          }
+                        },
+                        "description": "JSON object for the API vertions",
+                        "type": "object",
+                        "title": "api-versions"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                },
+                "examples": {
+                  "initial server version": {
+                    "value": {
+                      "values": [
+                        {
+                          "version": "0.1",
+                          "date": 1586527723,
+                          "changes": "Initial ver of the API REST"
+                        }
+                      ],
+                      "response": "200",
+                      "request": "GET"
+                    }
+                  },
+                  "with 2 versions": {
+                    "value": {
+                      "values": [
+                        {
+                          "version": "0.1",
+                          "date": 1586427723,
+                          "changes": "Initial ver of the API REST"
+                        },
+                        {
+                          "version": "0.2",
+                          "date": 1586527723,
+                          "changes": "GWS endpoint add \n "
+                        }
+                      ],
+                      "response": "200",
+                      "request": "GET"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-versions",
+        "description": "Versioning of the REST API",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "description": "unique id to be used in the response HEADER",
+            "name": "request-id"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request GET \\\r\n  --url https://spacloud.eu/public/9786582aaf93e/versions \\\r\n  --header 'request-id: 234rferf34' \\\r\n  --header 'token: 432dfascfws4'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method GET \\\r\n  --header 'token: 432dfascfws4' \\\r\n  --header 'request-id: 234rferf34' \\\r\n  --output-document \\\r\n  - https://spacloud.eu/public/9786582aaf93e/versions"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/versions\",\r\n  \"method\": \"GET\",\r\n  \"headers\": {}\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = null;\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"GET\", \"https://spacloud.eu/public/9786582aaf93e/versions\");\r\nxhr.setRequestHeader(\"token\", \"432dfascfws4\");\r\nxhr.setRequestHeader(\"request-id\", \"234rferf34\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/versions\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"GET\",\r\n  CURLOPT_HTTPHEADER => array(\r\n    \"request-id: 234rferf34\",\r\n    \"token: 432dfascfws4\"\r\n  ),\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/versions\")\r\n  .get()\r\n  .addHeader(\"token\", \"432dfascfws4\")\r\n  .addHeader(\"request-id\", \"234rferf34\")\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\nheaders = {\r\n    'token': \"432dfascfws4\",\r\n    'request-id': \"234rferf34\"\r\n    }\r\n\r\nconn.request(\"GET\", \"/public/9786582aaf93e/versions\", headers=headers)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"GET\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/versions\");\r\n\r\nstruct curl_slist *headers = NULL;\r\nheaders = curl_slist_append(headers, \"token: 432dfascfws4\");\r\nheaders = curl_slist_append(headers, \"request-id: 234rferf34\");\r\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/gws": {
+      "get": {
+        "summary": "[GET] /gws",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON array with select GW's",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "maxItems": 400,
+                      "minItems": 0,
+                      "items": {
+                        "required": [
+                          "id",
+                          "sensors",
+                          "adress",
+                          "local-ip",
+                          "public-ip",
+                          "sofware-ver",
+                          "last-comm",
+                          "group",
+                          "cluster",
+                          "hw-ver",
+                          "name"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "uuid of this GW",
+                            "format": "uuid"
+                          },
+                          "sensors": {
+                            "type": "array",
+                            "default": "0",
+                            "description": "list of sensors connected to this GW",
+                            "maxItems": 5,
+                            "minItems": 0,
+                            "items": {
+                              "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors/post/requestBody/content/application~1json/schema/properties/values/items"
+                            }
+                          },
+                          "adress": {
+                            "type": "array",
+                            "description": "array of strings for the address of the house where the GW is located",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "gps": {
+                            "$ref": "#/paths/~1gws~1%7Bgw-id%7D/put/requestBody/content/application~1json/schema/properties/values/properties/gps"
+                          },
+                          "local-ip": {
+                            "type": "string",
+                            "description": "Internet IP of the GW/router"
+                          },
+                          "public-ip": {
+                            "type": "string",
+                            "description": "Internet IP of the GW/router"
+                          },
+                          "sofware-ver": {
+                            "type": "string",
+                            "description": "GW software version"
+                          },
+                          "last-comm": {
+                            "type": "integer",
+                            "default": 0,
+                            "description": "Timestamp of last GW communication with cloud server"
+                          },
+                          "group": {
+                            "type": "string",
+                            "description": "GW belong to this group"
+                          },
+                          "cluster": {
+                            "type": "string",
+                            "description": "GW belong to this cluster"
+                          },
+                          "hw-ver": {
+                            "type": "string",
+                            "description": "Hardware of the GW"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Friendly name of this GW"
+                          }
+                        },
+                        "description": "Simple Model representation of the remote GW object",
+                        "x-tags": [
+                          "models"
+                        ],
+                        "type": "object",
+                        "title": "sgw-info"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "206": {
+            "description": "Partial Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON array with select GW's",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "maxItems": 400,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "#/paths/~1gws/get/responses/200/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "206"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    },
+                    "page-number": {
+                      "type": "number",
+                      "description": "number of page related to HEADER {page-size}. The client can make another request without query parameters to retrieve next page until it receives a 200 RESPONSE",
+                      "minimum": 1
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request",
+                    "page-number"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "error": {
+                      "required": [
+                        "id",
+                        "description",
+                        "msg"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "id of the error"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "text description of the error"
+                        },
+                        "msg": {
+                          "type": "string",
+                          "description": "caption of the error"
+                        }
+                      },
+                      "x-tags": [
+                        "models"
+                      ],
+                      "description": "JSON definition for the possible error",
+                      "type": "object",
+                      "title": "err-codes"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "JSON object representing the error associated with this operation",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-gws",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all",
+              "enum": [
+                "all",
+                "online",
+                "offline"
+              ]
+            },
+            "in": "query",
+            "name": "online",
+            "description": "select GWs that are online/offline (internet connection) "
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all"
+            },
+            "in": "query",
+            "name": "cluster",
+            "description": "select GWs belonging to a cluster"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "all"
+            },
+            "in": "query",
+            "name": "group",
+            "description": "select GWs belonging to a group"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AND",
+                "OR"
+              ],
+              "default": "AND"
+            },
+            "in": "query",
+            "name": "query-logic",
+            "description": "define if all query parameters supplyed should be satisfied or just one is enough"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 200,
+              "minimum": 1,
+              "maximum": 400
+            },
+            "in": "query",
+            "name": "page-size",
+            "description": "number of max json records to be return"
+          }
+        ],
+        "description": "End point representing all GWs.",
+        "tags": [
+          "gws"
+        ],
+        "x-code-samples": [
+          {
+            "lang": "shell/cURL",
+            "source": "curl --request GET \\\r\n  --url 'https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200' \\\r\n  --header 'token: 234dfsdf3'"
+          },
+          {
+            "lang": "Shell/Wget",
+            "source": "wget --quiet \\\r\n  --method GET \\\r\n  --header 'token: 234dfsdf3' \\\r\n  --output-document \\\r\n  - 'https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200'"
+          },
+          {
+            "lang": "JavaScript/JQuery",
+            "source": "var settings = {\r\n  \"async\": true,\r\n  \"crossDomain\": true,\r\n  \"url\": \"https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\",\r\n  \"method\": \"GET\",\r\n  \"headers\": {\r\n    \"token\": \"234dfsdf3\"\r\n  }\r\n}\r\n\r\n$.ajax(settings).done(function (response) {\r\n  console.log(response);\r\n});"
+          },
+          {
+            "lang": "JavaScript/XMLHttpRequest",
+            "source": "var data = null;\r\n\r\nvar xhr = new XMLHttpRequest();\r\nxhr.withCredentials = true;\r\n\r\nxhr.addEventListener(\"readystatechange\", function () {\r\n  if (this.readyState === this.DONE) {\r\n    console.log(this.responseText);\r\n  }\r\n});\r\n\r\nxhr.open(\"GET\", \"https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\");\r\nxhr.setRequestHeader(\"token\", \"234dfsdf3\");\r\n\r\nxhr.send(data);"
+          },
+          {
+            "lang": "PHP",
+            "source": "<?php\r\n\r\n$curl = curl_init();\r\n\r\ncurl_setopt_array($curl, array(\r\n  CURLOPT_URL => \"https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\",\r\n  CURLOPT_RETURNTRANSFER => true,\r\n  CURLOPT_ENCODING => \"\",\r\n  CURLOPT_MAXREDIRS => 10,\r\n  CURLOPT_TIMEOUT => 30,\r\n  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n  CURLOPT_CUSTOMREQUEST => \"GET\",\r\n  CURLOPT_HTTPHEADER => array(\r\n    \"token: 234dfsdf3\"\r\n  ),\r\n));\r\n\r\n$response = curl_exec($curl);\r\n$err = curl_error($curl);\r\n\r\ncurl_close($curl);\r\n\r\nif ($err) {\r\n  echo \"cURL Error #:\" . $err;\r\n} else {\r\n  echo $response;\r\n}"
+          },
+          {
+            "lang": "Java",
+            "source": "OkHttpClient client = new OkHttpClient();\r\n\r\nRequest request = new Request.Builder()\r\n  .url(\"https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\")\r\n  .get()\r\n  .addHeader(\"token\", \"234dfsdf3\")\r\n  .build();\r\n\r\nResponse response = client.newCall(request).execute();"
+          },
+          {
+            "lang": "Python3",
+            "source": "import http.client\r\n\r\nconn = http.client.HTTPSConnection(\"spacloud.eu\")\r\n\r\nheaders = { 'token': \"234dfsdf3\" }\r\n\r\nconn.request(\"GET\", \"/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\", headers=headers)\r\n\r\nres = conn.getresponse()\r\ndata = res.read()\r\n\r\nprint(data.decode(\"utf-8\"))"
+          },
+          {
+            "lang": "C",
+            "source": "CURL *hnd = curl_easy_init();\r\n\r\ncurl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, \"GET\");\r\ncurl_easy_setopt(hnd, CURLOPT_URL, \"https://spacloud.eu/public/9786582aaf93e/gws?online=all&cluster=all&group=all&query-logic=AND&page-size=200\");\r\n\r\nstruct curl_slist *headers = NULL;\r\nheaders = curl_slist_append(headers, \"token: 234dfsdf3\");\r\ncurl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);\r\n\r\nCURLcode ret = curl_easy_perform(hnd);"
+          }
+        ]
+      }
+    },
+    "/gws/{gw-id}/sensors": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "[GET] /gws/{gw-id}/sensors",
+        "tags": [
+          "sensors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-sgws-gw-id-sensors",
+        "description": "Retrive all sensors from a GW",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ]
+      },
+      "post": {
+        "summary": "[POST] /gws/{gw-id}/sensors",
+        "operationId": "post-sgws-gw-id-sensors",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "201"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "default": "400",
+                      "type": "string"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "POST"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "description": "Add new sensor(s) to the GW",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "values": {
+                    "type": "array",
+                    "maxItems": 400,
+                    "minItems": 1,
+                    "items": {
+                      "required": [
+                        "id",
+                        "name",
+                        "last-comm",
+                        "manufactor",
+                        "model",
+                        "capabilities",
+                        "removed"
+                      ],
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "uuid of this sensor"
+                        },
+                        "mac": {
+                          "type": "string",
+                          "description": "mac adrress of the sensor"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the sensor"
+                        },
+                        "last-comm": {
+                          "type": "integer",
+                          "description": "last sensor communication with the GW"
+                        },
+                        "manufactor": {
+                          "type": "string",
+                          "description": "Sensor manufactor"
+                        },
+                        "model": {
+                          "type": "string",
+                          "description": "Sensor model"
+                        },
+                        "LQI": {
+                          "type": "number",
+                          "description": "Link quality indicator"
+                        },
+                        "RSSI": {
+                          "type": "number",
+                          "description": "Received signal strength "
+                        },
+                        "battery-level": {
+                          "type": "integer",
+                          "description": "Battery level"
+                        },
+                        "capabilities": {
+                          "type": "array",
+                          "minItems": 0,
+                          "items": {
+                            "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors~1%7Bsensor-id%7D~1data/post/requestBody/content/application~1json/schema/properties/values/items/properties/type"
+                          }
+                        },
+                        "last-alerts": {
+                          "type": "array",
+                          "minItems": 0,
+                          "items": {
+                            "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1alerts/post/requestBody/content/application~1json/schema/properties/values/items"
+                          }
+                        },
+                        "removed": {
+                          "type": "boolean",
+                          "default": "false",
+                          "description": "if the sensor has been removed from GW"
+                        }
+                      },
+                      "x-tags": [
+                        "models"
+                      ],
+                      "description": "Model for Sensor description",
+                      "type": "object",
+                      "title": "sensor"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Sensor to be added to trhe GW"
+        },
+        "tags": [
+          "sensors"
+        ]
+      }
+    },
+    "/gws/{gw-id}/sensors/{sensor-id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gw-id",
+          "in": "path",
+          "required": true
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "sensor-id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "[GET] /gws/{gw-id}/sensors/{sensor-id}",
+        "tags": [
+          "sensors"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "values": {
+                      "type": "array",
+                      "maxItems": 1,
+                      "minItems": 1,
+                      "items": {
+                        "$ref": "#/paths/~1gws~1%7Bgw-id%7D~1sensors/post/requestBody/content/application~1json/schema/properties/values/items"
+                      }
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "values",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "$ref": "#/paths/~1gws/get/responses/400/content/application~1json/schema/properties/error"
+                    },
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "error",
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "GET"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "operationId": "get-gws-gw-id-sensors-sensor-id",
+        "description": "Get particular sensor from a GW",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "Token return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "[DELETE] /gws/{gw-id}/sensors/{sensor-id}",
+        "operationId": "delete-gws-gw-id-sensors-sensor-id",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "200"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "DELETE"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "400"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "DELETE"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "401"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "DELETE"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "request-id": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "unique id used in the request HEADER"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "response": {
+                      "type": "string",
+                      "default": "404"
+                    },
+                    "request": {
+                      "type": "string",
+                      "default": "DELETE"
+                    }
+                  },
+                  "required": [
+                    "response",
+                    "request"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "Remove sensor from GW (this will only mark the sensor as removed, but keeps all data)",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "token",
+            "description": "oken return by server after authentication process",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "request-id",
+            "description": "unique id to be used in the response HEADER"
+          }
+        ],
+        "tags": [
+          "sensors"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Introduction",
+      "description": "<div id=\"mref\" rref=\"https://spacloud.eu/uuid/e4ae90d03bb7f?action=download\"></div>"
+    },
+    {
+      "name": "server",
+      "description": "Cloud Server"
+    },
+    {
+      "name": "gws",
+      "description": "GWs data"
+    },
+    {
+      "name": "sensors",
+      "description": "sensors data"
+    },
+    {
+      "name": "alerts",
+      "description": "GW and Sensor alerts"
+    },
+    {
+      "name": "sse",
+      "description": "Server-Sent Events"
+    },
+    {
+      "name": "help",
+      "description": "<div id=\"mref\" rref=\"https://spacloud.eu/public/9786582aaf93e/assets/sse_help.md\"></div>"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://spacloud.eu/public/9786582aaf93e",
+      "description": "ENCORE-SPA",
+      "variables": {
+        "username": {
+          "default": "demo",
+          "description": "this value is assigned by the service provider, in this example `gigantic-server.com`"
+        }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {}
+  }
+}

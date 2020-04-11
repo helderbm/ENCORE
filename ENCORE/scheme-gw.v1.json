@@ -1,0 +1,81 @@
+{
+  "title": "sgw-info",
+  "type": "object",
+  "x-tags": [
+    "models"
+  ],
+  "description": "Simple Model representation of the remote GW object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "uuid of this GW",
+      "format": "uuid"
+    },
+    "sensors": {
+      "type": "array",
+      "default": "0",
+      "description": "list of sensors connected to this GW",
+      "maxItems": 5,
+      "minItems": 0,
+      "items": {
+        "$ref": "./scheme-sensor.v1.json"
+      }
+    },
+    "adress": {
+      "type": "array",
+      "description": "array of strings for the address of the house where the GW is located",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gps": {
+      "$ref": "./scheme-gps.v1.json"
+    },
+    "local-ip": {
+      "type": "string",
+      "description": "Internet IP of the GW/router"
+    },
+    "public-ip": {
+      "type": "string",
+      "description": "Internet IP of the GW/router"
+    },
+    "sofware-ver": {
+      "type": "string",
+      "description": "GW software version"
+    },
+    "last-comm": {
+      "type": "integer",
+      "default": 0,
+      "description": "Timestamp of last GW communication with cloud server"
+    },
+    "group": {
+      "type": "string",
+      "description": "GW belong to this group"
+    },
+    "cluster": {
+      "type": "string",
+      "description": "GW belong to this cluster"
+    },
+    "hw-ver": {
+      "type": "string",
+      "description": "Hardware of the GW"
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name of this GW"
+    }
+  },
+  "required": [
+    "id",
+    "sensors",
+    "adress",
+    "local-ip",
+    "public-ip",
+    "sofware-ver",
+    "last-comm",
+    "group",
+    "cluster",
+    "hw-ver",
+    "name"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+"title": "api-versions",
+        "type": "object",
+        "description": "JSON object for the API vertions",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "vaersion number"
+          },
+          "date": {
+            "type": "string",
+            "description": "version date"
+          },
+          "changes": {
+            "type": "string",
+            "description": "changes since last version"
+          }
+        },
+        "required": [
+          "version",
+          "date",
+          "changes"
+        ],
+        "x-tags": [
+          "models"
+        ]
+}

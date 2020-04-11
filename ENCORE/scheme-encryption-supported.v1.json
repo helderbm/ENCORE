@@ -1,0 +1,23 @@
+{
+  "title": "encryption-types",
+  "type": "object",
+  "description": "Type of encryption communications supported by the loud server",
+  "x-tags": [
+    "models"
+  ],
+  "x-examples": {},
+  "properties": {
+    "MCRYPT_RIJNDAEL_256": {
+      "type": "boolean",
+      "default": "false"
+    },
+    "blockchain": {
+      "type": "boolean",
+      "default": "false"
+    }
+  },
+  "required": [
+    "MCRYPT_RIJNDAEL_256",
+    "blockchain"
+  ]
+}

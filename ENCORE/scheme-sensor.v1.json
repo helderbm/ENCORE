@@ -1,0 +1,74 @@
+{
+  "title": "sensor",
+  "type": "object",
+  "description": "Model for Sensor description",
+  "x-tags": [
+    "models"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "uuid of this sensor"
+    },
+    "mac": {
+      "type": "string",
+      "description": "mac adrress of the sensor"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the sensor"
+    },
+    "last-comm": {
+      "type": "integer",
+      "description": "last sensor communication with the GW"
+    },
+    "manufactor": {
+      "type": "string",
+      "description": "Sensor manufactor"
+    },
+    "model": {
+      "type": "string",
+      "description": "Sensor model"
+    },
+    "LQI": {
+      "type": "number",
+      "description": "Link quality indicator"
+    },
+    "RSSI": {
+      "type": "number",
+      "description": "Received signal strength "
+    },
+    "battery-level": {
+      "type": "integer",
+      "description": "Battery level"
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "./scheme-sensor-capabilities.v1.json"
+      }
+    },
+    "last-alerts": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "./scheme-sensor-alerts.v1.json"
+      }
+    },
+    "removed": {
+      "type": "boolean",
+      "default": "false",
+      "description": "if the sensor has been removed from GW"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "last-comm",
+    "manufactor",
+    "model",
+    "capabilities",
+    "removed"
+  ]
+}

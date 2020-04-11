@@ -1,0 +1,27 @@
+{
+  "title": "err-codes",
+  "type": "object",
+  "description": "JSON definition for the possible error",
+  "x-tags": [
+    "models"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "id of the error"
+    },
+    "description": {
+      "type": "string",
+      "description": "text description of the error"
+    },
+    "msg": {
+      "type": "string",
+      "description": "caption of the error"
+    }
+  },
+  "required": [
+    "id",
+    "description",
+    "msg"
+  ]
+}

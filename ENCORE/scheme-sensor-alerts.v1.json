@@ -1,0 +1,56 @@
+{
+  "title": "sgw-dg-alerts",
+        "type": "object",
+        "description": "Alert entries from GW ",
+        "x-tags": [
+          "models"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "type of the alert",
+            "enum": [
+              "BATT",
+              "MOV",
+              "DOOR",
+              "WINDOW"
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "default": 0,
+            "description": "Level of severity of the alert",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "description": {
+            "type": "string",
+            "description": "Text description of the alert"
+          },
+          "created_at": {
+            "type": "integer",
+            "default": 0,
+            "description": "Data of the occurrence in the format of linux TimeStamp",
+            "format": "int32"
+          },
+          "processed_at": {
+            "type": "integer",
+            "default": 0,
+            "description": "Date of alert proessed in the format of linux TimeStamp",
+            "format": "int32"
+          },
+          "origin": {
+            "type": "string",
+            "description": "Alert origin (sensor id, gw, etc)"
+          }
+        },
+        "required": [
+          "type",
+          "level",
+          "description",
+          "created_at",
+          "processed_at",
+          "origin"
+        ]
+}

@@ -1,0 +1,46 @@
+{
+  "title": "sensor-data",
+  "type": "object",
+  "x-tags": [
+    "models"
+  ],
+  "description": "Represents the readings of a sensor in a specific time interval",
+  "properties": {
+    "min": {
+      "type": "number",
+      "description": "min value in the interval"
+    },
+    "max": {
+      "type": "number",
+      "description": "max value in the interval"
+    },
+    "avg": {
+      "type": "number",
+      "description": "Average value of readings"
+    },
+    "readings": {
+      "type": "integer",
+      "description": "number of reading in this interval"
+    },
+    "time-size": {
+      "type": "integer",
+      "description": "the duratioof the interval in minutes"
+    },
+    "time-start": {
+      "type": "integer",
+      "description": "The initial of the interval in the format of linux TimeStamp"
+    },
+    "type": {
+      "$ref": "./scheme-sensor-capabilities.v1.json"
+    }
+  },
+  "required": [
+    "min",
+    "max",
+    "avg",
+    "readings",
+    "time-size",
+    "time-start",
+    "type"
+  ]
+}

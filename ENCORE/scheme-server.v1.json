@@ -1,0 +1,31 @@
+{
+  "title": "server",
+  "type": "object",
+  "x-tags": [
+    "models"
+  ],
+  "description": "Cloud server information",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "uuid of this server"
+    },
+    "api-ver": {
+      "type": "string",
+      "description": "current REST API version used by the cloud server"
+    },
+    "encryption": {
+      "$ref": "./scheme-encryption-supported.v1.json"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Timestamp of the cloud server"
+    }
+  },
+  "required": [
+    "id",
+    "api-ver",
+    "encryption",
+    "timestamp"
+  ]
+}
